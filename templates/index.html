@@ -6,6 +6,15 @@
 </head>
 <body>
 <!--双花括号+变量名content语法直接显示app.py的变量值-->
-<h1>{{ content }}</h1>
+<!--<h1>{{ content }}</h1>-->
+<h1>Hello</h1>
+<!--action是将表单内容提交到login地址-->
+<form action="/login" method="post">
+    <input type="text" name="username">
+    <input type="password" name="password">
+    <input type="submit" value="提交">
+</form>
+
+<h2>{{ get_flashed_messages()[0] }}</h2>
 </body>
 </html>
