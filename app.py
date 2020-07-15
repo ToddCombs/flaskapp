@@ -1,17 +1,33 @@
-from flask import Flask, request, url_for, render_template, flash, abort
+from flask import Flask, request, url_for, \
+    render_template, flash, abort, redirect
 from models import User
 app = Flask(__name__)
 # 使用消息提示时需调用secret_key，flask使用他对消息加密
 app.secret_key = '213'
 
 @app.route('/')
-def hello_world():
+def index():
+    """这是主页，试验用户访问首页时自动跳转至add方法"""
+    return redirect(url_for('add'))
+
+
+@app.route('/add', methods=['GET', 'POST'])
+def add():
     # return '<h1>Hello World!</h1>'
     # content = "Hello FFFFlask!"
     # flash消息提示
     flash("Helloooo Flask!")
+    if request.method == 'POST':
+        a = request.form['adder1']
+        b = request.form['adder2']
+        a = int(a)
+        b = int(b)
+        c = a + b
+        return render_template("index.html", message=str(c))
     # return render_template("index.html", content=content)
     return render_template("index.html")
+
+
 
 @app.route('/user')
 # def hello_user():
@@ -96,6 +112,7 @@ def use(use_id):
     else:
         # abort()函数用于提前退出一个请求，并用指定的错误码返回。
         abort(404)
+
 
 
 if __name__ == '__main__':
