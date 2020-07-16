@@ -1,17 +1,24 @@
 from flask import Flask, request, url_for, \
-    render_template, flash, abort, redirect
+    render_template, flash, abort, redirect, session
 from models import User
 
 app = Flask(__name__)
 # 使用消息提示时需调用secret_key，flask使用他对消息加密
 app.secret_key = '213'
 
+USER_DICT = {
+    '1': {'name': '发财', 'age': 8, },
+    '2': {'name': '婉婷', 'age': 18, },
+    '3': {'name': '妞妞', 'age': 28, },
+}
+
 @app.route('/')
 def index():
     """这是主页，试验用户访问首页时自动跳转至add方法"""
+
     return redirect(url_for('add'))
 
-@app.route('/add', methods=['GET', 'POST'])
+@app.route('/add', methods=['GET','POST'])
 def add():
     # return '<h1>Hello World!</h1>'
     # content = "Hello FFFFlask!"
@@ -93,7 +100,8 @@ def login():
         return render_template("index.html")
     if username == 'toddcombs' and password == '111111':
         flash("登陆成功")
-        return redirect("https://github.com/ToddCombs")
+        session['user_info'] = username
+        return redirect("add")
     else:
         flash("用户名/密码错误")
         return render_template("index.html")
