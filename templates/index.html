@@ -12,14 +12,20 @@
     <div align="center" style="margin-top: 40px;">
         <img src="../static/testEngineer.png">
     </div>
-    <h1>Hello</h1>
-    <!--action是将表单内容提交到login地址-->
-    <form action="/login" method="post">
-        <input type="text" name="username">
-        <input type="password" name="password">
-        <input type="submit" value="提交">
-    </form>
-    <h2>{{ get_flashed_messages()[0] }}</h2>
+    <div align="center">
+        <h1>你好，请登录：</h1>
+        <!--action是将表单内容提交到login地址-->
+        <form action="/login" method="post">
+            <input type="text" name="username" placeholder="用户名">
+            <br>
+            <input type="password" name="password" placeholder="密码">
+            <br>
+            <input type="submit" value="提交">
+            <input type="reset" value="重置">
+        </form>
+        <h3>{{ get_flashed_messages()[0] }}</h3>
+    </div>
+
     <br><br><br>
     <div align="center" style="margin-top: 60px;">
         <h3>加法运算小程序</h3>
