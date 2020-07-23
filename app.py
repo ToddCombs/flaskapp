@@ -2,6 +2,7 @@ from flask import Flask, request, url_for, \
     render_template, flash, abort, redirect, session
 from models import User
 
+
 app = Flask(__name__)
 # 使用消息提示时需调用secret_key，flask使用他对消息加密
 app.secret_key = '213'
